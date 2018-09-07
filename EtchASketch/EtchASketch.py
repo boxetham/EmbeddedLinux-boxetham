@@ -1,35 +1,53 @@
-import keyboard
+import sys
 
+somethingChanged = True
 row = 0
 col = 0
 board = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
-
+print("Move by pressing the keyboard button corresponding to the way you")
+print("want to move and then hit enter")
+print("Directions: u - up, d - down, r - right, l - left c - clear the board")
+print("The O is where the curser is currently")
 while True:  # making a loop
-    try:  # used try so that if user pressed other than the given key error will not be shown
-        if keyboard.is_pressed('u'):  
-            if col != 7:
-                col = col + 1
-        if keyboard.is_pressed('d'):
-            if col != 0:  
-                col = col - 1
-        if keyboard.is_pressed('r'):  
-            if row != 7:
-                row = row + 1
-        if keyboard.is_pressed('l'):  
-            if row != 0:
-                row = row - 1
-        if keyboard.is_pressed('c'):
-            for x in range(0, range(len(board))):
-                for y in range(0, range(len(board[x]))):
-                    board[x][y] = 0
-        board[row][col] = 1
-    except:
-        pass
-    finally:
-        # print board here
-        for x in range(0, range(len(board))):
-            for y in range(0, range(len(board[x]))):
-                if board[x][y] == 1:
-                    print("X ")
+    # print board here
+    if somethingChanged:
+        sys.stdout.write("  ")
+        for x in range(0, len(board)):
+            sys.stdout.write(`x + 1` + " ")
+        sys.stdout.write("\n")
+        for x in range(0, len(board)):
+            for y in range(0, len(board[x])):
+                if y == 0:
+                    sys.stdout.write(`x + 1` + " ")
+                if x == row and y == col:
+                    sys.stdout.write("O ")
+                elif board[x][y] == 1:
+                    sys.stdout.write("X ")
                 else:
-                    print("  ")
+                    sys.stdout.write("  ")
+            sys.stdout.write("\n")
+        sys.stdout.flush()
+        somethingChanged = False
+    inputChar = sys.stdin.read(1)
+    board[row][col] = 1
+    if inputChar == 'u':  
+        if row != 0:
+            row = row - 1
+        somethingChanged = True
+    if inputChar == 'd':
+        if row != 7:  
+            row = row + 1
+        somethingChanged = True
+    if inputChar == 'r':  
+        if col != 7:
+            col = col + 1
+        somethingChanged = True
+    if inputChar == 'l':  
+        if col != 0:
+            col = col - 1
+        somethingChanged = True
+    if inputChar == 'c':
+        for x in range(0, len(board)):
+            for y in range(0, len(board[x])):
+                board[x][y] = 0
+        somethingChanged = True
