@@ -1,17 +1,22 @@
 import sys
 import Adafruit_BBIO.GPIO as GPIO
 
-GPIO.setup("P9_41", GPIO.in)
-GPIO.setup("P9_42", GPIO.in)
-GPIO.setup("P9_21", GPIO.in)
-GPIO.setup("P9_22", GPIO.in)
+GPIO.setup("P9_23", GPIO.IN)
+GPIO.setup("P9_42", GPIO.IN)
+GPIO.setup("P9_21", GPIO.IN)
+GPIO.setup("P9_22", GPIO.IN)
 somethingChanged = True
 row = 0
+left = 0
+right = 0
+down = 0
+up = 0
 col = 0
 board = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
 print("Move by pressing the keyboard button corresponding to the way you")
 print("want to move and then hit enter")
-print("Directions: u - up, d - down, r - right, l - left c - clear the board")
+print("Directions: P9_21 - up, P9_22 - down, P9_42 - right, P9_23 - left")
+print("Keyboard c - clear the board, e - exit")
 print("The O is where the curser is currently")
 while True:  # making a loop
     # print board here
@@ -34,23 +39,28 @@ while True:  # making a loop
         sys.stdout.flush()
         somethingChanged = False
     board[row][col] = 1
-    left = GPIO.input("P9_41")
+    prevLeft = left
+    prevRight = right
+    prevDown = down
+    prevUp = up
+    left = GPIO.input("P9_23")
     right = GPIO.input("P9_42")
     up = GPIO.input("P9_21")
     down = GPIO.input("P9_22")
-    if up == 1:  
+    if up == 1 and prevUp == 0:  
         if row != 0:
             row = row - 1
         somethingChanged = True
-    if down == 1:
+    if down == 1 and prevDown == 0:
         if row != 7:  
             row = row + 1
         somethingChanged = True
-    if right == 1:  
+    if right == 1 and prevRight == 0:  
         if col != 7:
             col = col + 1
         somethingChanged = True
-    if left == 1:  
+    if left == 1 and prevLeft == 0:  
         if col != 0:
             col = col - 1
         somethingChanged = True
+GPIO.cleanup()
