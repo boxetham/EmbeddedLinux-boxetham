@@ -1,6 +1,10 @@
-#!/usr/bin/env python
 import sys
+import Adafruit_BBIO.GPIO as GPIO
 
+GPIO.setup("P9_41", GPIO.in)
+GPIO.setup("P9_42", GPIO.in)
+GPIO.setup("P9_21", GPIO.in)
+GPIO.setup("P9_22", GPIO.in)
 somethingChanged = True
 row = 0
 col = 0
@@ -29,26 +33,24 @@ while True:  # making a loop
             sys.stdout.write("\n")
         sys.stdout.flush()
         somethingChanged = False
-    inputChar = sys.stdin.read(1)
     board[row][col] = 1
-    if inputChar == 'u':  
+    left = GPIO.input("P9_41")
+    right = GPIO.input("P9_42")
+    up = GPIO.input("P9_21")
+    down = GPIO.input("P9_22")
+    if up == 1:  
         if row != 0:
             row = row - 1
         somethingChanged = True
-    if inputChar == 'd':
+    if down == 1:
         if row != 7:  
             row = row + 1
         somethingChanged = True
-    if inputChar == 'r':  
+    if right == 1:  
         if col != 7:
             col = col + 1
         somethingChanged = True
-    if inputChar == 'l':  
+    if left == 1:  
         if col != 0:
             col = col - 1
-        somethingChanged = True
-    if inputChar == 'c':
-        for x in range(0, len(board)):
-            for y in range(0, len(board[x])):
-                board[x][y] = 0
         somethingChanged = True
