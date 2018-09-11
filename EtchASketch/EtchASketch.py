@@ -16,7 +16,6 @@ board = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 
 print("Move by pressing the keyboard button corresponding to the way you")
 print("want to move and then hit enter")
 print("Directions: P9_21 - up, P9_22 - down, P9_42 - right, P9_23 - left")
-print("Keyboard c - clear the board, e - exit")
 print("The O is where the curser is currently")
 while True:  # making a loop
     # print board here
