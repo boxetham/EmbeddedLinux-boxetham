@@ -13,3 +13,10 @@ Move by pressing the keyboard button corresponding to the way you
 want to move and then hit enter
 Directions: u - up, d - down, r - right, l - left, c - clear the board
 The O is where the curser currently is
+
+Looks good.
+How do I quit?
+Be sure to do a chmod +x on you file so it will execute.
+Doesn't look like you can do any size board.
+
+Score:  8/10
