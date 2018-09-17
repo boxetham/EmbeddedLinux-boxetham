@@ -5,6 +5,7 @@ import time
 import smbus
 import Adafruit_BBIO.GPIO as GPIO
 
+# set up pins for clear and stop
 GPIO.setup("P9_23", GPIO.IN)
 GPIO.setup("P9_42", GPIO.IN)
 
@@ -25,20 +26,22 @@ upDownEncoder = RotaryEncoder(eQEP2b)
 upDownEncoder.setAbsolute()  # set to 0 position
 upDownEncoder.enable()
 
+#begin of etch a sketch
 col = 0
 row = 0
 mapping = [1, 2, 4, 8, 16, 32, 64, 128]
 board = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 while True:
     time.sleep(.05)
+    # get input from buttons
     stop = GPIO.input("P9_23")
     clear = GPIO.input("P9_42")
-    if clear == 1:
+    if clear == 1: # reset the board
         board = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-    if stop == 1:
+    if stop == 1: # exit the program
 	break
     board[col * 2] = mapping[row] | board[col * 2]  # turn path green to stay 
-    for x in range (0,8):
+    for x in range (0,8): # reset the red so only 1 is orange
 	board[x*2+1] = 0
     board[(col * 2) + 1] = mapping[row]  # turn current position orange
     bus.write_i2c_block_data(matrix, 0, board)
