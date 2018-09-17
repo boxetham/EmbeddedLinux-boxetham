@@ -23,24 +23,20 @@ upDownEncoder.enable()
 
 col = 0
 row = 0
+mapping = [0, 1, 2, 4, 8, 16, 32, 64]
 board = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 while True: 
-    bus.write_i2c_block_data(matrix, 0, board)
-    time.sleep(5)
-    board[0] = 0x0F
+    board[col * 2] = mapping[row] | board[col * 2]  # turn path green to stay 
+    board[(col * 2) - 1] = mapping[row]  # turn current position orange
     bus.write_i2c_block_data(matrix, 0, board)
     # check to see if the position has changed
     leftRightPosition = leftRightEncoder.position
     if leftRightPosition > 0:
-        prevCol = col
         col = col + 1
     elif leftRightPosition < 0: 
-        prevCol = col
         col = col - 1
     upDownPosition = upDownEncoder.position
     if upDownPosition > 0:
-        prevRow = row
         row = row + 1
     elif upDownPosition < 0: 
-        prevRow = row
         row = row - 1
