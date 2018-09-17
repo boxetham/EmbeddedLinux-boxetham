@@ -4,6 +4,9 @@ from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP1, eQEP2
 import time
 import smbus
 
+GPIO.setup("P9_23", GPIO.IN)
+GPIO.setup("P9_42", GPIO.IN)
+
 bus = smbus.SMBus(2)  # Use i2c bus 1
 matrix = 0x70  # Use address 0x70
 
@@ -25,7 +28,13 @@ col = 0
 row = 0
 mapping = [0, 1, 2, 4, 8, 16, 32, 64]
 board = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-while True: 
+while True:
+    stop = GPIO.input("P9_23")
+    clear = GPIO.input("P9_42")
+    if clear == 1:
+        board = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+    if stop == 1:
+        break
     board[col * 2] = mapping[row] | board[col * 2]  # turn path green to stay 
     board[(col * 2) - 1] = mapping[row]  # turn current position orange
     bus.write_i2c_block_data(matrix, 0, board)
@@ -33,10 +42,15 @@ while True:
     leftRightPosition = leftRightEncoder.position
     if leftRightPosition > 0:
         col = col + 1
+        leftRightEncoder.setAbsolute()
     elif leftRightPosition < 0: 
         col = col - 1
+        leftRightEncoder.setAbsolute()
     upDownPosition = upDownEncoder.position
     if upDownPosition > 0:
         row = row + 1
+        upDownEncoder.setAbsolute() 
     elif upDownPosition < 0: 
         row = row - 1
+        upDownEncoder.setAbsolute()
+GPIO.cleanup()
