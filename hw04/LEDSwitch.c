@@ -118,6 +118,7 @@ int main(int argc, char *argv[]) {
 
     munmap((void *)gpio_addr, GPIO1_SIZE);
     munmap((void *)gpio_addr1, GPIO1_SIZE);
+    munmap((void *)gpio_addr2, GPIO1_SIZE);
     close(fd);
     return 0;
 }
