@@ -1,4 +1,4 @@
-The homework is an EtchASketch that check the position on two different
+The homework is an EtchASketch that checks the position on two different
 encoders and moves the position accordingly. The current position is 
 represented by an orange light with the rest of it lighting it up green. 
 The position moves just based on whether the encoder position is positive
@@ -17,3 +17,10 @@ The temp sensor script works by reading in values and then doing the
 corresponding math. It just uses the i2cget commands to read in each 
 sensor. The sensors are wired to ground and then power to differeniate
 the addresses of the temp sensors. 
+
+========================
+Professor Yoder's Comments
+
+Looks good.  You instructions are clear.
+
+Score:10/10
