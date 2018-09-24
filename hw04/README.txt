@@ -1,5 +1,7 @@
 In this homework I made a program that turns on an LED in response to a button 
-press using mmap. 
+press using mmap. I had to use mmap 3 times to access GPIO0, GPIO1, and GPIO3 due
+to the pins I used. I then just check the input from the button and assign the LED
+appropriately. 
 
 Next I toggled a gpio pin as fast as I could. After set up, the program just makes
 an on call then an off call with nothing else in a while loop. This is done with mmap. 
