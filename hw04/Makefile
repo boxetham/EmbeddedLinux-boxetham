@@ -5,9 +5,12 @@ CFLAGS  := -O3 -g
 #
 # Programs
 #
-all:	 gpioToggle
+all:	 ledswitch gpioToggle
 
 gpioToggle: gpioToggle.c beaglebone_gpio.h
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $<
+
+ledswitch: LEDSwitch.c beaglebone_gpio.h
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $<
 
 #
@@ -18,7 +21,7 @@ gpioToggle: gpioToggle.c beaglebone_gpio.h
 	$(CC) $(CFLAGS) $(TOOLS_CFLAGS) -c $< -o $@
 
 clean:
-	rm gpioToggle 
+	rm gpioToggle ledswitch
 
 print:
 	@echo LDFLAGS = $(LDFLAGS)

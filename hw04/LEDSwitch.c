@@ -37,8 +37,17 @@ int main(int argc, char *argv[]) {
     volatile unsigned int *gpio_setdataout_addr1;
     volatile unsigned int *gpio_cleardataout_addr1;
     unsigned int reg1;
+    volatile void *gpio_addr2;
+    volatile unsigned int *gpio_datain;
+    volatile unsigned int *gpio_datain1;
+    volatile unsigned int *gpio_oe_addr2;
+    volatile unsigned int *gpio_setdataout_addr2;
+    volatile unsigned int *gpio_cleardataout_addr2;
+    unsigned int reg2;
     int LED;
     int LED1;
+    int switch1;
+    int switch2;
     
     // Set the signal callback for Ctrl-C
 	signal(SIGINT, signal_handler);
@@ -47,14 +56,21 @@ int main(int argc, char *argv[]) {
 
     gpio_addr = mmap(0, GPIO1_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO3_START_ADDR);
     gpio_addr1 = mmap(0, GPIO1_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO1_START_ADDR);
+    gpio_addr2 = mmap(0, GPIO1_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO0_START_ADDR);
 
     gpio_oe_addr           = gpio_addr + GPIO_OE;
     gpio_setdataout_addr   = gpio_addr + GPIO_SETDATAOUT;
     gpio_cleardataout_addr = gpio_addr + GPIO_CLEARDATAOUT;
 
     gpio_oe_addr1           = gpio_addr1 + GPIO_OE;
+    gpio_datain1            = gpio_addr1 + GPIO_DATAIN;
     gpio_setdataout_addr1   = gpio_addr1 + GPIO_SETDATAOUT;
     gpio_cleardataout_addr1 = gpio_addr1 + GPIO_CLEARDATAOUT;
+
+    gpio_oe_addr2           = gpio_addr2 + GPIO_OE;
+    gpio_datain             = gpio_addr2 + GPIO_DATAIN;
+    gpio_setdataout_addr2   = gpio_addr2 + GPIO_SETDATAOUT;
+    gpio_cleardataout_addr2 = gpio_addr2 + GPIO_CLEARDATAOUT;
 
     if(gpio_addr == MAP_FAILED || gpio_addr1 == MAP_FAILED) {
         printf("Unable to map GPIO\n");
@@ -64,6 +80,8 @@ int main(int argc, char *argv[]) {
     // Set USR3 to be an output pin
     LED = (1<<21);
     LED1 = (1<<28);
+    switch1 = (1<<7);
+    switch2 = (1<<17);
     reg = *gpio_oe_addr;
     reg1 = *gpio_oe_addr1;
     printf("GPIO1 configuration: %X\n", reg);
@@ -75,6 +93,18 @@ int main(int argc, char *argv[]) {
 
     printf("Start blinking LED USR3\n");
     while(keepgoing) {
+        if(*gpio_datain & switch1) {
+            *gpio_setdataout_addr1 = LED1;
+    	} else {
+            *gpio_cleardataout_addr1 = LED1;
+    	}
+
+        if(*gpio_datain1 & switch2) {
+            *gpio_setdataout_addr= LED;
+    	} else {
+            *gpio_cleardataout_addr = LED;
+    	}
+/**
         *gpio_setdataout_addr = LED;
         *gpio_setdataout_addr1 = LED1;
 
@@ -83,7 +113,7 @@ int main(int argc, char *argv[]) {
         *gpio_cleardataout_addr = LED;
         *gpio_cleardataout_addr1 = LED1;
 
-	usleep(250000);
+	usleep(250000); **/
     }
 
     munmap((void *)gpio_addr, GPIO1_SIZE);
