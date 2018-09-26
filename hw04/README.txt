@@ -15,3 +15,12 @@ on I couldn't figure it out. I noticed that there was an --edit command with fbi
 you have to give it input from the keyboard and I didn't know how to hook a keyboard up to 
 the display. The pictures of the different things I did with the display can be found in the
 homework 4 display pictures folder. 
+
+
+========================
+Professor Yoder's Comments
+
+Looks good.  Wow, 340ns IS much faster.
+I don't see your Memory Map numbers.
+
+Score: 9/10
