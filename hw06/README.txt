@@ -1,0 +1,1 @@
+The video answers doc contains the answers to the video that I watched in preperation for the speaker.
