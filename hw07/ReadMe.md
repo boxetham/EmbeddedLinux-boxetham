@@ -4,3 +4,8 @@ leds.js: This file started from the example leds.js in exerises/iot/blynk.
          read the new value, computed the fraction of the way the slider was
          and then wrote to the new led pin with an analog write. f
          The value is only updated when the slider is released.
+
+========================
+Professor Yoder's Comments
+
+Score:  10/10
