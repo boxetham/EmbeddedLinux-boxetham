@@ -13,3 +13,10 @@ host computer
 
 a.out_bone.jpeg - shows the result from the cross compiling and the function being
 run on the bone
+
+========================
+Professor Yoder's Comments
+
+Looks good. I assume you finally got it working.
+
+Score:  10/10
