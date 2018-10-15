@@ -1,0 +1,27 @@
+with_load: 
+rt: 
+
+real- 1m 43.430s
+user- 0m 1.089s
+sys- 0m 6.396s
+
+nort: 
+
+real- 1m 40.187s
+user- 0m 1.643s
+sys- 0m 5.760s
+
+
+
+no_load: 
+rt: 
+
+real- 1m 40.189s
+user- 0m 0.862s
+sys- 0m 0.3262s
+
+nort:
+
+real- 1m 43.772s
+user- 0m 1.058s
+sys- 0m 3.173s
