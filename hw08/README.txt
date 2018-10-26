@@ -8,3 +8,10 @@ no_load directory: results and plot that I got when letting the program run with
 
 in_class directory: These results seemed better. This is what I got when I ran it in class on Friday. 
 		    Included because the plot is better than what I got by myself. 
+
+========================
+Professor Yoder's Comments
+
+I agree with your comments.  I was expecting a greater difference.
+
+Score:  10/10

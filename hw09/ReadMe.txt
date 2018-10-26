@@ -12,3 +12,11 @@ This folder has a picture that shows the speed up from approx 3.6us period to 59
 
 Folder 5.9: 
 I saw the change of the input here but it never percolated to the output. There was also that weird cyclical part of the input when the input was high. I am not really sure what was going on here and for the sake of time I couldn't invest further. 
+
+========================
+Professor Yoder's Comments
+
+What's the highest frequency for part 5.4?
+Looks like 5.9 wasn't working.  Did you do the config-pin?
+
+Score:  7/10
