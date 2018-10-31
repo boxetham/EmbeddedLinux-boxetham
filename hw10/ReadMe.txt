@@ -6,3 +6,11 @@ trying to control c to stop it also wasn't working and I would have to restart t
 commented that out again. 
 
 google sheet - https://docs.google.com/spreadsheets/d/1RGCPblU0pdsl25AsHv1fEQvt-sxh6H01QsfRh-lJebg/edit?usp=sharing
+
+========================
+Professor Yoder's Comments
+
+Seems like an awkward way to read the sensors.  Why use a shell script?  
+Where's your project's timeline?
+
+Score:  8/10
